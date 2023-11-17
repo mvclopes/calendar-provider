@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Calendar Provider"
 include(":app")
+include(":calendar-provider")
