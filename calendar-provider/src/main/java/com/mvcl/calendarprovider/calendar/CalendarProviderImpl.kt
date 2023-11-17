@@ -4,9 +4,8 @@ import android.content.ContentResolver
 import android.util.Log
 import com.mvcl.calendarprovider.calendar.constants.CalendarConstants
 import com.mvcl.calendarprovider.calendar.model.CalendarEntity
-import com.mvcl.calendarprovider.calendar.model.CalendarProvider
 
-/*internal*/ class CalendarProviderImpl(
+internal class CalendarProviderImpl(
     private val contentResolver: ContentResolver
 ) : CalendarProvider {
 
