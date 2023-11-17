@@ -34,18 +34,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
-import com.mvcl.calendarprovider.calendar.CalendarProviderImpl
+import com.mvcl.calendarprovider.calendar.CalendarProvider
 import com.mvcl.calendarprovider.calendar.model.CalendarEntity
-import com.mvcl.calendarprovider.calendar.model.CalendarProvider
 import com.mvcl.calendarprovider.ui.theme.CalendarProviderTheme
+import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
-    private val calendarProvider: CalendarProvider by lazy {
-        CalendarProviderImpl(
-            contentResolver = contentResolver
-        )
-    }
+    private val calendarProvider: CalendarProvider by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
