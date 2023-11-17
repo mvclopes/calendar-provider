@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.MultiplePermissionsState
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.mvcl.calendarprovider.R
 import com.mvcl.calendarprovider.calendar.model.CalendarEntity
@@ -70,43 +71,61 @@ fun CalendarsScreen(
         },
         floatingActionButtonPosition = FabPosition.End
     ) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)) {
+        Box(
+            modifier = Modifier.padding(innerPadding)
+        ) {
             if (calendarPermissions.allPermissionsGranted) {
-                when (state) {
-                    CalendarViewState.Error,
-                    CalendarViewState.Idle -> Unit
-                    CalendarViewState.Loading ->
-                        Box(
-                            modifier= Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            CircularProgressIndicator()
-                        }
-                    is CalendarViewState.Success -> CalendarList(
-                        calendars = state.calendars,
-                        onCardClicked = onNavigateToEvent
-                    )
-                }
+                CalendarView(state, onNavigateToEvent)
             } else {
-                Column(
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.padding(16.dp)
-                ) {
-                    val textToShow = if (calendarPermissions.shouldShowRationale)
-                        R.string.calendar_should_show_rationale
-                    else R.string.calendar_denied_permission_explication
-
-                    Text(stringResource(id = textToShow))
-
-                    Button(
-                        onClick = { calendarPermissions.launchMultiplePermissionRequest() }
-                    ) {
-                        Text(stringResource(id = R.string.request_permission_button_label))
-                    }
-                }
+                RequestCalendarPermissions(calendarPermissions)
             }
         }
+    }
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+private fun RequestCalendarPermissions(calendarPermissions: MultiplePermissionsState) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(16.dp)
+    ) {
+        val textToShow = if (calendarPermissions.shouldShowRationale)
+            R.string.calendar_should_show_rationale
+        else R.string.calendar_denied_permission_explication
+
+        Text(stringResource(id = textToShow))
+
+        Button(
+            onClick = { calendarPermissions.launchMultiplePermissionRequest() }
+        ) {
+            Text(stringResource(id = R.string.request_permission_button_label))
+        }
+    }
+}
+
+@Composable
+private fun CalendarView(
+    state: CalendarViewState,
+    onNavigateToEvent: (Long) -> Unit
+) {
+    when (state) {
+        CalendarViewState.Error,
+        CalendarViewState.Idle -> Unit
+
+        CalendarViewState.Loading ->
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+
+        is CalendarViewState.Success -> CalendarList(
+            calendars = state.calendars,
+            onCardClicked = onNavigateToEvent
+        )
     }
 }
 
