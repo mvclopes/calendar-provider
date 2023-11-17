@@ -37,7 +37,10 @@ import com.mvcl.calendarprovider.calendar.model.CalendarEntity
 
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun CalendarsScreen(state: CalendarViewState) {
+fun CalendarsScreen(
+    state: CalendarViewState,
+    onNavigateToEvent: (Long) -> Unit
+) {
     val calendarPermissions = rememberMultiplePermissionsState(
         permissions = listOf(
             Manifest.permission.READ_CALENDAR,
@@ -79,7 +82,10 @@ fun CalendarsScreen(state: CalendarViewState) {
                         ) {
                             CircularProgressIndicator()
                         }
-                    is CalendarViewState.Success -> CalendarList(calendars = state.calendars)
+                    is CalendarViewState.Success -> CalendarList(
+                        calendars = state.calendars,
+                        onCardClicked = onNavigateToEvent
+                    )
                 }
             } else {
                 Column(
@@ -106,7 +112,10 @@ fun CalendarsScreen(state: CalendarViewState) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CalendarList(calendars: List<CalendarEntity>) {
+fun CalendarList(
+    calendars: List<CalendarEntity>,
+    onCardClicked: (Long) -> Unit
+) {
     LazyColumn {
         items(calendars) { calendar ->
             Card(
@@ -116,7 +125,7 @@ fun CalendarList(calendars: List<CalendarEntity>) {
                 colors = CardDefaults.cardColors(
                     containerColor = Color(calendar.color)
                 ),
-                onClick = {}
+                onClick = { onCardClicked(calendar.id) }
             ) {
                 Column(
                     modifier = Modifier.padding(8.dp),
