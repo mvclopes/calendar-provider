@@ -30,7 +30,8 @@ fun NavGraphBuilder.remindersScreen() {
 
         RemindersScreen(
             state = state,
-            onBackPressed = { navController.popBackStack() }
+            onBackPressed = { navController.popBackStack() },
+            onCreateReminder = { dto -> viewModel.createReminder(dto) }
         )
     }
 }
