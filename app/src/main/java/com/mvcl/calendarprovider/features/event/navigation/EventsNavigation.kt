@@ -7,6 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.mvcl.calendarprovider.LocalNavController
 import com.mvcl.calendarprovider.features.event.EventsScreen
 import com.mvcl.calendarprovider.features.event.EventsViewModel
 import com.mvcl.calendarprovider.navigation.AppRoutes
@@ -15,7 +16,7 @@ import org.koin.core.parameter.parametersOf
 
 private const val CALENDAR_ID_ARG = "calendarId"
 
-fun NavGraphBuilder.eventsScreen(navController: NavController) {
+fun NavGraphBuilder.eventsScreen() {
     composable(
         route = "${AppRoutes.EVENT_SCREEN.name}/{$CALENDAR_ID_ARG}",
         arguments = listOf(
@@ -23,6 +24,7 @@ fun NavGraphBuilder.eventsScreen(navController: NavController) {
         )
     ) { backStackEntry ->
         val calendarId = backStackEntry.arguments?.getLong(CALENDAR_ID_ARG) ?: 0
+        val navController = LocalNavController.current
         val viewModel = koinViewModel<EventsViewModel>{ parametersOf(calendarId) }
         val state by viewModel.state.collectAsState()
 
