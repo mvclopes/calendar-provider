@@ -6,11 +6,3 @@ data class ReminderEntity(
     val minutes: Int,
     val method: ReminderMethod,
 )
-
-enum class ReminderMethod { ALERT, DEFAULT, EMAIL, SMS }
-
-fun String.toReminderMethod(): ReminderMethod {
-    return runCatching {
-        ReminderMethod.valueOf(this)
-    }.getOrDefault(ReminderMethod.DEFAULT)
-}
