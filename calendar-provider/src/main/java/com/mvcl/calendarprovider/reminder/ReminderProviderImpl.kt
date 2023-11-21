@@ -1,11 +1,12 @@
 package com.mvcl.calendarprovider.reminder
 
 import android.content.ContentResolver
+import android.content.ContentValues
 import android.provider.CalendarContract
-import android.util.Log
 import com.mvcl.calendarprovider.reminder.constants.ReminderConstants
+import com.mvcl.calendarprovider.reminder.mapper.toReminderMethod
+import com.mvcl.calendarprovider.reminder.model.ReminderDTO
 import com.mvcl.calendarprovider.reminder.model.ReminderEntity
-import com.mvcl.calendarprovider.reminder.model.toReminderMethod
 
 internal class ReminderProviderImpl(
     private val contentResolver: ContentResolver
@@ -25,7 +26,7 @@ internal class ReminderProviderImpl(
             cursor.apply {
                 val id = getLong(ReminderConstants.PROJECTION_REMINDER_ID)
                 val minutes = getInt(ReminderConstants.PROJECTION_REMINDER_MINUTES)
-                val method = getString(ReminderConstants.PROJECTION_REMINDER_METHOD)
+                val method = getInt(ReminderConstants.PROJECTION_REMINDER_METHOD)
 
                 reminders.add(
                     ReminderEntity(
@@ -38,8 +39,16 @@ internal class ReminderProviderImpl(
             }
         }
         cursor?.close()
-        Log.i("TAG_MVCL", "getReminders result size: ${reminders.size}")
 
         return reminders
+    }
+
+    override suspend fun createReminder(eventId: Long, reminder: ReminderDTO) {
+        val values = ContentValues().apply {
+            put(CalendarContract.Reminders.EVENT_ID, eventId)
+            put(CalendarContract.Reminders.MINUTES, reminder.minutes)
+            put(CalendarContract.Reminders.METHOD, reminder.method.value)
+        }
+        contentResolver.insert(ReminderConstants.uri, values)
     }
 }
