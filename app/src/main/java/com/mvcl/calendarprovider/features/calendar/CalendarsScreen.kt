@@ -17,11 +17,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +30,7 @@ import com.google.accompanist.permissions.MultiplePermissionsState
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.mvcl.calendarprovider.R
 import com.mvcl.calendarprovider.calendar.model.CalendarEntity
+import com.mvcl.calendarprovider.ui.components.CustomTopBar
 import com.mvcl.calendarprovider.ui.components.EmptyView
 import com.mvcl.calendarprovider.ui.components.ErrorView
 import com.mvcl.calendarprovider.ui.components.LoadingInCenter
@@ -51,19 +49,7 @@ fun CalendarsScreen(
     )
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary
-                ),
-                title = {
-                    Text(
-                        text = "Available calendars",
-                        color = Color.White
-                    )
-                }
-            )
-        },
+        topBar = { CustomTopBar(title = "Available calendars") },
         floatingActionButton = {
             FloatingActionButton(onClick = {}) {
                 Icon(Icons.Default.Add, contentDescription = null)
