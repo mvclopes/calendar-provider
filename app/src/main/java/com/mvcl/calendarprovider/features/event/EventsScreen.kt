@@ -31,7 +31,8 @@ import com.mvcl.calendarprovider.event.model.EventEntity
 @Composable
 fun EventsScreen(
     state: EventViewState,
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
+    onEventClicked: (Long) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -71,7 +72,7 @@ fun EventsScreen(
 
                 is EventViewState.Success -> EventList(
                     events = state.events,
-                    onEventClicked = {}
+                    onEventClicked = onEventClicked
                 )
             }
 

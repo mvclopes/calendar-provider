@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import com.mvcl.calendarprovider.LocalNavController
 import com.mvcl.calendarprovider.features.event.EventsScreen
 import com.mvcl.calendarprovider.features.event.EventsViewModel
+import com.mvcl.calendarprovider.features.reminder.navigation.navigateToRemindersScreen
 import com.mvcl.calendarprovider.navigation.AppRoutes
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -18,7 +19,7 @@ private const val CALENDAR_ID_ARG = "calendarId"
 
 fun NavGraphBuilder.eventsScreen() {
     composable(
-        route = "${AppRoutes.EVENT_SCREEN.name}/{$CALENDAR_ID_ARG}",
+        route = "${AppRoutes.EVENT_SCREEN}/{$CALENDAR_ID_ARG}",
         arguments = listOf(
             navArgument(CALENDAR_ID_ARG) { type = NavType.LongType }
         )
@@ -30,11 +31,12 @@ fun NavGraphBuilder.eventsScreen() {
 
         EventsScreen(
             state = state,
-            onBackPressed = { navController.popBackStack() }
+            onBackPressed = { navController.popBackStack() },
+            onEventClicked = { eventId -> navController.navigateToRemindersScreen(eventId) }
         )
     }
 }
 
 fun NavController.navigateToEventsScreen(calendarId: Long) {
-    navigate("${AppRoutes.EVENT_SCREEN.name}/$calendarId")
+    navigate("${AppRoutes.EVENT_SCREEN}/$calendarId")
 }
