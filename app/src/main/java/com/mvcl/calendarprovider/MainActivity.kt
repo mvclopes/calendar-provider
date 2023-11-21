@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                             startDestination = AppRoutes.CALENDAR_SCREEN.name,
                         ) {
                             calendarsScreen(navController)
-                            eventsScreen()
+                            eventsScreen(navController)
                         }
                     }
                 }
