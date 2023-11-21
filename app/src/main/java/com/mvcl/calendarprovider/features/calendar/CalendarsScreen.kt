@@ -33,6 +33,8 @@ import com.google.accompanist.permissions.MultiplePermissionsState
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.mvcl.calendarprovider.R
 import com.mvcl.calendarprovider.calendar.model.CalendarEntity
+import com.mvcl.calendarprovider.components.EmptyView
+import com.mvcl.calendarprovider.components.ErrorView
 import com.mvcl.calendarprovider.components.LoadingInCenter
 
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterial3Api::class)
@@ -110,7 +112,8 @@ private fun CalendarView(
     onNavigateToEvent: (Long) -> Unit
 ) {
     when (state) {
-        CalendarViewState.Error,
+        is CalendarViewState.Error -> ErrorView(errorMessage = state.throwable.message)
+
         CalendarViewState.Idle -> Unit
 
         CalendarViewState.Loading -> LoadingInCenter()
@@ -128,23 +131,27 @@ fun CalendarList(
     calendars: List<CalendarEntity>,
     onCardClicked: (Long) -> Unit
 ) {
-    LazyColumn {
-        items(calendars) { calendar ->
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color(calendar.color)
-                ),
-                onClick = { onCardClicked(calendar.id) }
-            ) {
-                Column(
-                    modifier = Modifier.padding(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+    if (calendars.isEmpty()) {
+        EmptyView(message = "No available calendars")
+    } else {
+        LazyColumn {
+            items(calendars) { calendar ->
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color(calendar.color)
+                    ),
+                    onClick = { onCardClicked(calendar.id) }
                 ) {
-                    Text(text = "Display name: ${calendar.displayName}")
-                    Text(text = "Owner account: ${calendar.ownerAccount}")
+                    Column(
+                        modifier = Modifier.padding(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(text = "Display name: ${calendar.displayName}")
+                        Text(text = "Owner account: ${calendar.ownerAccount}")
+                    }
                 }
             }
         }
