@@ -151,6 +151,7 @@ fun CalendarList(
                     ) {
                         Text(text = "Display name: ${calendar.displayName}")
                         Text(text = "Owner account: ${calendar.ownerAccount}")
+                        Text(text = "Max reminders allowed: ${calendar.maxRemindersAllowed}")
                     }
                 }
             }

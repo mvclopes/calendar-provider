@@ -1,7 +1,6 @@
 package com.mvcl.calendarprovider.calendar
 
 import android.content.ContentResolver
-import android.util.Log
 import com.mvcl.calendarprovider.calendar.constants.CalendarConstants
 import com.mvcl.calendarprovider.calendar.model.CalendarEntity
 
@@ -25,18 +24,19 @@ internal class CalendarProviderImpl(
                 val displayName = getString(CalendarConstants.PROJECTION_DISPLAY_NAME)
                 val color = getInt(CalendarConstants.PROJECTION_CALENDAR_COLOR)
                 val ownerAccount = getString(CalendarConstants.PROJECTION_OWNER_ACCOUNT)
+                val maxRemindersAllowed = getInt(CalendarConstants.PROJECTION_MAX_REMINDERS)
                 calendars.add(
                     CalendarEntity(
                         id = id,
                         displayName = displayName,
                         color = color,
-                        ownerAccount = ownerAccount
+                        ownerAccount = ownerAccount,
+                        maxRemindersAllowed = maxRemindersAllowed
                     )
                 )
             }
         }
         cursor?.close()
-        Log.i("TAG_MVCL", "getCalendars result size:  ${calendars.size}")
 
         return calendars
     }
