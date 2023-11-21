@@ -3,6 +3,7 @@ package com.mvcl.calendarprovider.features.reminder
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mvcl.calendarprovider.reminder.ReminderProvider
+import com.mvcl.calendarprovider.reminder.model.ReminderDTO
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -30,6 +31,18 @@ class RemindersViewModel(
                 reminderProvider.getReminders(eventId)
             }.onSuccess {
                 state.emit(ReminderViewState.Success(it))
+            }.onFailure {
+                state.emit(ReminderViewState.Error(it))
+            }
+        }
+    }
+
+    fun createReminder(reminder: ReminderDTO) {
+        viewModelScope.launch(dispatcher) {
+            runCatching {
+                reminderProvider.createReminder(eventId, reminder)
+            }.onSuccess {
+                getReminders()
             }.onFailure {
                 state.emit(ReminderViewState.Error(it))
             }
