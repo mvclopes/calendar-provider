@@ -12,8 +12,8 @@ internal class EventProviderImpl(
     override fun getEvents(calendarId: Long): List<EventEntity> {
         val events = mutableListOf<EventEntity>()
         val cursor = contentResolver.query(
-            EventConstants.eventUri,
-            EventConstants.PROJECTION,
+            EventConstants.uri,
+            EventConstants.projection,
             "(${CalendarContract.Events.CALENDAR_ID} = ?)",
             arrayOf(calendarId.toString()),
             null

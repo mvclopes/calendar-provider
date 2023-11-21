@@ -14,8 +14,8 @@ internal class ReminderProviderImpl(
         val reminders = mutableListOf<ReminderEntity>()
 
         val cursor = contentResolver.query(
-            ReminderConstants.reminderUri,
-            ReminderConstants.PROJECTION,
+            ReminderConstants.uri,
+            ReminderConstants.projection,
             "(${CalendarContract.Reminders.EVENT_ID} = ?)",
             arrayOf(eventId.toString()),
             null
@@ -26,7 +26,6 @@ internal class ReminderProviderImpl(
                 val id = getLong(ReminderConstants.PROJECTION_REMINDER_ID)
                 val minutes = getInt(ReminderConstants.PROJECTION_REMINDER_MINUTES)
                 val method = getString(ReminderConstants.PROJECTION_REMINDER_METHOD)
-//                val method = getInt(ReminderConstants.PROJECTION_REMINDER_METHOD)
 
                 reminders.add(
                     ReminderEntity(

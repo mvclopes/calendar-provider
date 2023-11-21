@@ -12,8 +12,8 @@ internal class CalendarProviderImpl(
     override fun getCalendars(): List<CalendarEntity> {
         val calendars = mutableListOf<CalendarEntity>()
          val cursor = contentResolver.query(
-             CalendarConstants.calendarUri,
-             CalendarConstants.PROJECTION,
+             CalendarConstants.uri,
+             CalendarConstants.projection,
              "",
              emptyArray<String>(),
              null
