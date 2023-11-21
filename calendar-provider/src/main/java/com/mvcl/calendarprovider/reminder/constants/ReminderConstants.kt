@@ -2,10 +2,11 @@ package com.mvcl.calendarprovider.reminder.constants
 
 import android.net.Uri
 import android.provider.CalendarContract
+import com.mvcl.calendarprovider.common.CommonConstants
 
-internal object ReminderConstants {
-    val reminderUri: Uri = CalendarContract.Reminders.CONTENT_URI
-    val PROJECTION = arrayOf(
+internal object ReminderConstants: CommonConstants {
+    override val uri: Uri = CalendarContract.Reminders.CONTENT_URI
+    override val projection = arrayOf(
         CalendarContract.Reminders._ID,
         CalendarContract.Reminders.MINUTES,
         CalendarContract.Reminders.METHOD

@@ -2,10 +2,11 @@ package com.mvcl.calendarprovider.calendar.constants
 
 import android.net.Uri
 import android.provider.CalendarContract
+import com.mvcl.calendarprovider.common.CommonConstants
 
-internal object CalendarConstants {
-    val calendarUri: Uri = CalendarContract.Calendars.CONTENT_URI
-    val PROJECTION = arrayOf(
+internal object CalendarConstants: CommonConstants {
+    override val uri: Uri = CalendarContract.Calendars.CONTENT_URI
+    override val projection = arrayOf(
         CalendarContract.Calendars._ID,
         CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,
         CalendarContract.Calendars.CALENDAR_COLOR,
