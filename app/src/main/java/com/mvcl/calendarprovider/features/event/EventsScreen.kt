@@ -22,9 +22,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.mvcl.calendarprovider.components.EmptyView
-import com.mvcl.calendarprovider.components.ErrorView
-import com.mvcl.calendarprovider.components.LoadingInCenter
+import com.mvcl.calendarprovider.ui.components.EmptyView
+import com.mvcl.calendarprovider.ui.components.ErrorView
+import com.mvcl.calendarprovider.ui.components.LoadingInCenter
 import com.mvcl.calendarprovider.event.model.EventEntity
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,4 +1,4 @@
-package com.mvcl.calendarprovider.components
+package com.mvcl.calendarprovider.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

@@ -33,9 +33,9 @@ import com.google.accompanist.permissions.MultiplePermissionsState
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.mvcl.calendarprovider.R
 import com.mvcl.calendarprovider.calendar.model.CalendarEntity
-import com.mvcl.calendarprovider.components.EmptyView
-import com.mvcl.calendarprovider.components.ErrorView
-import com.mvcl.calendarprovider.components.LoadingInCenter
+import com.mvcl.calendarprovider.ui.components.EmptyView
+import com.mvcl.calendarprovider.ui.components.ErrorView
+import com.mvcl.calendarprovider.ui.components.LoadingInCenter
 
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterial3Api::class)
 @Composable
