@@ -113,7 +113,7 @@ private fun CalendarView(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CalendarList(
+private fun CalendarList(
     calendars: List<CalendarEntity>,
     onCardClicked: (Long) -> Unit
 ) {
