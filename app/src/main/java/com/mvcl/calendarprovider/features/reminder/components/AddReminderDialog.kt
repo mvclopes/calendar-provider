@@ -112,7 +112,7 @@ fun AddReminderDialog(
                             onCreateReminder(
                                 minutes.toInt(),
                                 selectedOption.toReminderMethod()
-                            )
+                            ).also { onDismiss() }
                         }
                     ) {
                         Text(

@@ -67,7 +67,6 @@ fun RemindersScreen(
                     onDismiss = { shouldShowDialog = false },
                     onCreateReminder = { minutes, method ->
                         onCreateReminder(ReminderDTO(minutes, method))
-                        shouldShowDialog = false
                     }
                 )
             }
