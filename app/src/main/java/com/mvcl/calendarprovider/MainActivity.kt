@@ -17,6 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.mvcl.calendarprovider.features.calendar.navigation.calendarsScreen
 import com.mvcl.calendarprovider.features.event.navigation.eventsScreen
+import com.mvcl.calendarprovider.features.reminder.navigation.remindersScreen
 import com.mvcl.calendarprovider.navigation.AppRoutes
 import com.mvcl.calendarprovider.ui.theme.CalendarProviderTheme
 
@@ -44,6 +45,7 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 calendarsScreen()
                                 eventsScreen()
+                                remindersScreen()
                             }
                         }
                     }
