@@ -20,7 +20,7 @@ class CalendarsViewModel(
 
     private fun getCalendars() {
         viewModelScope.launch {
-        state.emit(CalendarViewState.Loading)
+            state.emit(CalendarViewState.Loading)
             delay(1500)
             runCatching {
                 calendarProvider.getCalendars()
