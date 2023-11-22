@@ -48,4 +48,16 @@ class RemindersViewModel(
             }
         }
     }
+
+    fun deleteReminder(id: Long) {
+        viewModelScope.launch(dispatcher) {
+            runCatching {
+                reminderProvider.deleteReminder(id)
+            }.onSuccess {
+                getReminders()
+            }.onFailure {
+                state.emit(ReminderViewState.Error(it))
+            }
+        }
+    }
 }
