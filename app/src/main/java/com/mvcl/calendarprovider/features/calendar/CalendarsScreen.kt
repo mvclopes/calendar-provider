@@ -27,7 +27,7 @@ import com.mvcl.calendarprovider.R
 import com.mvcl.calendarprovider.calendar.model.CalendarEntity
 import com.mvcl.calendarprovider.features.event.mapper.toEventArgs
 import com.mvcl.calendarprovider.features.event.model.EventArgs
-import com.mvcl.calendarprovider.ui.components.CustomTopBar
+import com.mvcl.calendarprovider.ui.components.DefaultTopBar
 import com.mvcl.calendarprovider.ui.components.EmptyView
 import com.mvcl.calendarprovider.ui.components.ErrorView
 import com.mvcl.calendarprovider.ui.components.LoadingInCenter
@@ -46,7 +46,7 @@ fun CalendarsScreen(
     )
 
     Scaffold(
-        topBar = { CustomTopBar(title = "Available calendars") },
+        topBar = { DefaultTopBar(title = "Available calendars") },
     ) { innerPadding ->
         Box(
             modifier = Modifier.padding(innerPadding)
