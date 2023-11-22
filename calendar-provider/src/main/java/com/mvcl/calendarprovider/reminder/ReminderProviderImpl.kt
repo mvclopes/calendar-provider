@@ -1,6 +1,7 @@
 package com.mvcl.calendarprovider.reminder
 
 import android.content.ContentResolver
+import android.content.ContentUris
 import android.content.ContentValues
 import android.provider.CalendarContract
 import com.mvcl.calendarprovider.reminder.constants.ReminderConstants
@@ -50,5 +51,10 @@ internal class ReminderProviderImpl(
             put(CalendarContract.Reminders.METHOD, reminder.method.value)
         }
         contentResolver.insert(ReminderConstants.uri, values)
+    }
+
+    override suspend fun deleteReminder(id: Long) {
+        val deleteUri = ContentUris.withAppendedId(ReminderConstants.uri, id)
+        contentResolver.delete(deleteUri, null, null)
     }
 }
