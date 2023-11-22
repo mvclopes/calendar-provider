@@ -19,7 +19,7 @@ fun NavGraphBuilder.calendarsScreen() {
 
         CalendarsScreen(
             state = state,
-            onNavigateToEvent = { id -> navController.navigateToEventsScreen(id) }
+            onNavigateToEvent = { eventArgs -> navController.navigateToEventsScreen(eventArgs) }
         )
     }
 }

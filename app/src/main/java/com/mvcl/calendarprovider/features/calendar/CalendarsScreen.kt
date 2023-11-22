@@ -30,6 +30,8 @@ import com.google.accompanist.permissions.MultiplePermissionsState
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.mvcl.calendarprovider.R
 import com.mvcl.calendarprovider.calendar.model.CalendarEntity
+import com.mvcl.calendarprovider.features.event.mapper.toEventArgs
+import com.mvcl.calendarprovider.features.event.model.EventArgs
 import com.mvcl.calendarprovider.ui.components.CustomTopBar
 import com.mvcl.calendarprovider.ui.components.EmptyView
 import com.mvcl.calendarprovider.ui.components.ErrorView
@@ -39,7 +41,7 @@ import com.mvcl.calendarprovider.ui.components.LoadingInCenter
 @Composable
 fun CalendarsScreen(
     state: CalendarViewState,
-    onNavigateToEvent: (Long) -> Unit
+    onNavigateToEvent: (EventArgs) -> Unit
 ) {
     val calendarPermissions = rememberMultiplePermissionsState(
         permissions = listOf(
@@ -95,7 +97,7 @@ private fun RequestCalendarPermissions(calendarPermissions: MultiplePermissionsS
 @Composable
 private fun CalendarView(
     state: CalendarViewState,
-    onNavigateToEvent: (Long) -> Unit
+    onNavigateToEvent: (EventArgs) -> Unit
 ) {
     when (state) {
         is CalendarViewState.Error -> ErrorView(errorMessage = state.throwable.message)
@@ -115,7 +117,7 @@ private fun CalendarView(
 @Composable
 private fun CalendarList(
     calendars: List<CalendarEntity>,
-    onCardClicked: (Long) -> Unit
+    onCardClicked: (EventArgs) -> Unit
 ) {
     if (calendars.isEmpty()) {
         EmptyView(message = "No available calendars")
@@ -129,7 +131,7 @@ private fun CalendarList(
                     colors = CardDefaults.cardColors(
                         containerColor = Color(calendar.color)
                     ),
-                    onClick = { onCardClicked(calendar.id) }
+                    onClick = { onCardClicked(calendar.toEventArgs()) }
                 ) {
                     Column(
                         modifier = Modifier.padding(8.dp),
