@@ -1,6 +1,7 @@
 package com.mvcl.calendarprovider.di
 
 import com.mvcl.calendarprovider.features.calendar.CalendarsViewModel
+import com.mvcl.calendarprovider.features.event.model.EventArgs
 import com.mvcl.calendarprovider.features.event.EventsViewModel
 import com.mvcl.calendarprovider.features.reminder.RemindersViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -14,9 +15,9 @@ object AppModule {
             )
         }
 
-        viewModel { (calendarId: Long) ->
+        viewModel { (args: EventArgs) ->
             EventsViewModel(
-                calendarId = calendarId,
+                args = args,
                 eventProvider = get()
             )
         }
