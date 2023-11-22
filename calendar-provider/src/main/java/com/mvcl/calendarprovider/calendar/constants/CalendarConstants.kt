@@ -11,11 +11,15 @@ internal object CalendarConstants: CommonConstants {
         CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,
         CalendarContract.Calendars.CALENDAR_COLOR,
         CalendarContract.Calendars.OWNER_ACCOUNT,
-        CalendarContract.Calendars.MAX_REMINDERS
+        CalendarContract.Calendars.MAX_REMINDERS,
+        CalendarContract.Calendars.ACCOUNT_NAME,
+        CalendarContract.Calendars.ACCOUNT_TYPE,
     )
     const val PROJECTION_ID = 0
     const val PROJECTION_DISPLAY_NAME = 1
     const val PROJECTION_CALENDAR_COLOR = 2
     const val PROJECTION_OWNER_ACCOUNT = 3
     const val PROJECTION_MAX_REMINDERS = 4
+    const val PROJECTION_ACCOUNT_NAME = 5
+    const val PROJECTION_ACCOUNT_TYPE = 6
 }

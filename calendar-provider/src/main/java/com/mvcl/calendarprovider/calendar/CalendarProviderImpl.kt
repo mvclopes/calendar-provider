@@ -25,13 +25,17 @@ internal class CalendarProviderImpl(
                 val color = getInt(CalendarConstants.PROJECTION_CALENDAR_COLOR)
                 val ownerAccount = getString(CalendarConstants.PROJECTION_OWNER_ACCOUNT)
                 val maxRemindersAllowed = getInt(CalendarConstants.PROJECTION_MAX_REMINDERS)
+                val accountName = getString(CalendarConstants.PROJECTION_ACCOUNT_NAME)
+                val accountType = getString(CalendarConstants.PROJECTION_ACCOUNT_TYPE)
                 calendars.add(
                     CalendarEntity(
                         id = id,
                         displayName = displayName,
                         color = color,
                         ownerAccount = ownerAccount,
-                        maxRemindersAllowed = maxRemindersAllowed
+                        maxRemindersAllowed = maxRemindersAllowed,
+                        accountName = accountName,
+                        accountType = accountType
                     )
                 )
             }

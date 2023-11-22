@@ -5,5 +5,7 @@ data class CalendarEntity(
     val displayName: String,
     val color: Int,
     val ownerAccount: String,
-    val maxRemindersAllowed: Int
+    val maxRemindersAllowed: Int,
+    val accountName: String,
+    val accountType: String
 )
