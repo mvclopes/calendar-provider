@@ -1,15 +1,18 @@
 package com.mvcl.calendarprovider.event
 
 import android.content.ContentResolver
+import android.content.ContentUris
 import android.provider.CalendarContract
 import android.util.Log
+import com.mvcl.calendarprovider.calendar.model.CalendarDTO
+import com.mvcl.calendarprovider.common.asSyncAdapter
 import com.mvcl.calendarprovider.event.constants.EventConstants
 import com.mvcl.calendarprovider.event.model.EventEntity
 
 internal class EventProviderImpl(
     private val contentResolver: ContentResolver
 ) : EventProvider {
-    override fun getEvents(calendarId: Long): List<EventEntity> {
+    override suspend fun getEvents(calendarId: Long): List<EventEntity> {
         val events = mutableListOf<EventEntity>()
         val cursor = contentResolver.query(
             EventConstants.uri,
@@ -54,5 +57,14 @@ internal class EventProviderImpl(
         Log.i("TAG_MVCL", "getEvents result size: ${events.size}")
 
         return events
+    }
+
+    override suspend fun deleteEvent(id: Long, calendarDTO: CalendarDTO) {
+        val uri = EventConstants.uri.asSyncAdapter(
+            accountName = calendarDTO.accountName,
+            accountType = calendarDTO.accountType
+        )
+        val deleteUri = ContentUris.withAppendedId(uri, id)
+        contentResolver.delete(deleteUri, null, null)
     }
 }
