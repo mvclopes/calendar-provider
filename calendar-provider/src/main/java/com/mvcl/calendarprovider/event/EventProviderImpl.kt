@@ -3,7 +3,6 @@ package com.mvcl.calendarprovider.event
 import android.content.ContentResolver
 import android.content.ContentUris
 import android.provider.CalendarContract
-import android.util.Log
 import com.mvcl.calendarprovider.calendar.model.CalendarDTO
 import com.mvcl.calendarprovider.common.asSyncAdapter
 import com.mvcl.calendarprovider.event.constants.EventConstants
@@ -54,7 +53,6 @@ internal class EventProviderImpl(
             }
         }
         cursor?.close()
-        Log.i("TAG_MVCL", "getEvents result size: ${events.size}")
 
         return events
     }
